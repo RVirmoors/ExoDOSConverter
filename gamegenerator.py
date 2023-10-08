@@ -42,7 +42,7 @@ class GameGenerator:
 
     # returns local game ouput dir of the generated game
     def getLocalGameOutputDir(self):
-        return os.path.join(self.getLocalParentOutputDir(), self.gameDir)
+        return os.path.join(self.getLocalParentOutputDir(), "."+self.gameDir)
 
     # returns local game data output dir of the generated game
     def getLocalGameDataOutputDir(self):
@@ -67,6 +67,10 @@ class GameGenerator:
             os.path.join(util.getCollectionGamesConfDir(self.exoCollectionDir, self.collectionVersion), self.game,
                          "dosbox.conf"),
             os.path.join(self.getLocalGameDataOutputDir(), "dosbox.conf"))
+        # If mapper.map exists, copy it in game.pc
+        mapperPath = os.path.join(util.getCollectionGamesConfDir(self.exoCollectionDir, self.collectionVersion), self.game, 'mapper.map') 
+        if os.path.exists(mapperPath):
+            shutil.copy2(mapperPath, os.path.join(self.getLocalGameOutputDir(), 'mapper.map'))
         # Create blank file with full game name        
         f = open(os.path.join(self.getLocalGameOutputDir(), util.getCleanGameID(self.metadata, '.txt')), 'w',
                  encoding='utf8')
@@ -302,7 +306,7 @@ class GameGenerator:
         dosboxCfg = open(os.path.join(self.getLocalGameOutputDir(), "dosbox.cfg"), 'a')
         # add mount c at end of dosbox.cfg
         romsFolder = util.getRomsFolderPrefix(self.conversionType, self.conversionConf)
-        retropieGameDir = romsFolder + "/" + self.genre + "/" + self.gameDir if self.useGenreSubFolders else romsFolder + "/" + self.gameDir
+        retropieGameDir = romsFolder + "/" + self.genre + "/." + self.gameDir if self.useGenreSubFolders else romsFolder + "/." + self.gameDir
         dosboxCfg.write("mount c " + retropieGameDir + "\n")
         dosboxCfg.write("c:\n")
         # copy all instructions from dosbox.bat to end of dosbox.cfg

@@ -23,3 +23,5 @@ build/main/xref-main.html
 dist/main.exe
 ExoDOSConverter.exe
 main.spec
+_out/
+selectionz*

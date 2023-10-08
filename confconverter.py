@@ -42,6 +42,8 @@ class ConfConverter:
                     retroDosboxCfg.write(cmdline)
                 else:
                     retroDosboxCfg.write("fullresolution=" + self.__getExpertParam__("fullresolutionCfg", "desktop") + "\n")
+            elif cmdline.startswith("windowresolution"):
+                retroDosboxCfg.write("windowresolution=original\n")
             elif cmdline.startswith("output"):
                 if gGator.conversionType == util.retrobat:
                     retroDosboxCfg.write(cmdline)
@@ -59,7 +61,7 @@ class ConfConverter:
             elif cmdline.startswith("buttonwrap"):
                 retroDosboxCfg.write("buttonwrap=false\n")
             elif cmdline.startswith("mapperfile"):
-                retroDosboxCfg.write("mapperfile=mapper.map\n")
+                retroDosboxCfg.write("mapperfile=." + gGator.game + ".pc/mapper.map\n")
             elif cmdline.startswith("ultradir"):
                 retroDosboxCfg.write(r"ultradir=C:\ULTRASND")
                 retroDosboxCfg.write("\n")
