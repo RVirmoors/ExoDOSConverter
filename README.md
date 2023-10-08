@@ -111,3 +111,10 @@ For eXoWin3x v2 issues, see [wiki page](https://github.com/Voljega/ExoDOSConvert
 eXoConverter uses python code from [MobyGamer's Total DOS Launcher](https://github.com/MobyGamer/total-dos-launcher)
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate?hosted_button_id=LEAH843NKNG72)
+
+## rvirmoors fork
+
+- names folders `.game.pc` instead of `game.pc`, to avoid duplicates in emulationstation
+- probably breaks platforms that aren't `retropie`
+- copies existing `mapper.map` files from eXoDOS into game folders and properly links them in `game.conf`
+- sets proper fullscreen sdl values (at least for my system...) in `game.conf`
